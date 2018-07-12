@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Edit User</title>
+</head>
+<body>
+	<h3>Edit User</h3>
+	{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			{% for message in messages %}
+				<p>{{ message }}</p>
+			{% endfor %}
+			<a href="/users/{{ _id }}/edit">Continue</a>
+		{% endif %}
+	{% endwith %}
+
+	{% for one in user %}
+		<form action="/users/{{ one.id }}/edit" method="post">
+			<p>
+				<label for="fn">First Name: </label>
+				<input type="text" name="first_name" id="fn" value="{{ one.first_name }}">
+			</p>
+			<p>
+				<label for="ln">Last Name: </label>
+				<input type="text" name="last_name" id="ln" value="{{ one.last_name }}">
+			</p>
+			<p>
+				<label for="email">Email: </label>
+				<input type="email" name="email" id="email" value="{{ one.email }}">
+			</p>
+			<br>
+			<input type="submit" value="Update">
+		</form>
+	{% endfor %}
+	<br>
+	<a href="/users">Cancel</a>
+
+</body>
+</html>

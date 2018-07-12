@@ -1,0 +1,23 @@
+.sucess{
+	color: green;
+}
+
+.error{
+	color:red;
+}
+
+.danger{
+	background-color: red;
+	color: white;
+	width: 270px;
+	height: auto;
+	text-align: center;
+}
+
+span{
+	color: purple;
+}
+
+.content{
+	margin-left: 30px;
+}

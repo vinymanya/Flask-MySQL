@@ -1,0 +1,16 @@
+table{
+	font-family: verdana, "Times New Romains", sans-serif;
+	border-collapse: collapse;
+	width: 80%;
+}
+
+td, th{
+	border:1px solid #dddddd;
+	text-align: left;
+	padding: 7px;
+}
+
+tr:nth-child(even){
+	background-color: #dddddd;
+	border:1px solid grey;
+}

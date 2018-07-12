@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Registration</title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'style.css')}}">
+</head>
+<body>
+	<h1>Registration</h1>
+
+	{% with messages = get_flashed_messages(with_categories = true) %}
+		{% if messages %}
+			{% for category, message in messages %}
+				<p class="{{ category }}">{{message}}</p>
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+	<form action="/users/register" method="post">
+		<label for="fn">First Name:</label>
+		<input type="text" name="first_name" id="fn"><br><br>
+		<label for="ln">Last Name:</label>
+		<input type="text" name="last_name" id="ln"><br><br>
+		<label for="em">Email:</label>
+		<input type="email" name="email" id="em"><br><br>
+		<label for="pw">Password:</label>
+		<input type="password" name="password" id="pw"><br><br>
+		<label for="pwc">Confirmation Password:</label>
+		<input type="password" name="pw_con" id="pwc"><br><br>
+		<input type="submit" value="Register">
+	</form>
+	<p>Already have an account? <a href="/users/login">Please Login</a></p>
+
+</body>
+</html>

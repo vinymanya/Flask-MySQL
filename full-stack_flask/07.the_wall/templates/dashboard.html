@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Logged In</title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'style.css')}}">
+</head>
+<body>
+	<a href="/logout">Logout</a>
+	<h3>Hi, <span>{{session["user_name"]}}</span> Welcome to the Wall</h3>
+	{% with messages = get_flashed_messages(with_categories = true) %}
+		{% if messages %}
+			{% for category, message in messages %}
+				<p class="{{ category }}">{{ message }}</p>
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+	<!-- Message form -->
+	<form action="/dashboard/messages" method="post">
+		<h3>Please Post a Message</h3>
+		<textarea cols="30" rows="5" name="user_post"></textarea>
+		<br><br>
+		<input type="submit" value="Post Message">
+	</form>
+
+	<!-- Display all messages from the db -->
+	{% if messages %}
+		{% for message in messages %}
+			<div>
+				<h5>Posted by: {{ message['Full_name'] }} on {{ message.time_stamp.strftime("%a, %d %b %Y %H:%M") }}</h5>
+				<p class="content">{{ message['message'] }}</p>
+
+				<!-- Display all comments here -->
+				{% if comments %}
+					{% for comment in comments %}
+						{% if message['msg_id'] == comment['message_id'] %}
+							<h5 class="content">Commented by: {{ comment.full_name }} on {{ comment.time_stamp.strftime("%a, %d %b %Y %H:%M") }}</h5>
+							<p class="content">{{ comment.user_comment }}</p>
+						{% endif %}
+					{% endfor %}
+				{% endif %}
+				<!-- Comment form -->
+				<form action="/dashboard/comments" method="post" class="content">
+					<!-- Get the message id through hidden input so we know the message we are posting a comment to -->
+					<input type="hidden" name="msg_id" value="{{ message['msg_id'] }}">
+					<textarea cols="30" rows="2" name="comment"
+					placeholder="Post a comment"></textarea>
+					<br><br>
+					<input type="submit" value="Post a comment">
+				</form>
+			</div>
+		{% endfor %}
+	{% endif %}
+
+</body>
+</html>

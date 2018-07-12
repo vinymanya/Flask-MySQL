@@ -1,0 +1,36 @@
+NameError: global name 'text' is not defined
+
+Solution: Make sure  you import “text” from SQLAlchemy to fix this.
+
+IndentationError: expected an indented block
+
+Solution: you should properly indent your code, so that the python interpreter knows the limit of your function or code.
+
+self.db = SQLAlchemy(app)
+NameError: global name 'SQLAlchemy' is not defined
+
+Fix: In your import statement you should also import the SQLALchemy modules.
+
+
+result = self.db.session.execute(text(query), data)
+AttributeError: 'MySQLConnection' object has no attribute 'db'
+
+FIX: You have committed to pass in the ‘db’ attribute. This piece is missing in order to successfully establish a connection to the database.
+
+TypeError: query_db() takes no arguments (2 given)
+FIX: No argument has been passed in to the query
+ Function…which is crucial when it comes to querying the data…
+
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: game [SQL: u'SELECT * FROM game LIMIT 5']
+
+Fix:Operator error simply means that sqlalchemy modules don’t know to find the path to get to the database. Make sure you use app.config[’sqlalchemy_DATABASE_URI’] = DATABASE_URI
+
+
+from mysqlconnection import MySQLConnector
+ImportError: cannot import name MySQLConnector
+Solution: Make sure mysql. Variable is properly set.Double check the connection area.
+
+EMAIL_REGX = re.compile(r'^[a-zA-Z0-9\.\+_-]+@[a-zA-Z0-9\._-]+\.[a-zA-Z]*$')
+NameError: name 're' is not defined
+Solution: When you are trying to validate emails, make sure to import re from flask.
+

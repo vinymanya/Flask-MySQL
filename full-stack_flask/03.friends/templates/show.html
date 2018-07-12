@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Show One Friend</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='show.css') }}">
+</head>
+<body>
+	<h3>Friend's Details</h3>
+	<p>ID: {{ one_friend.id }}</p>
+	<p>First Name: {{ one_friend.first_name }}</p>
+	<p>Last Name: {{ one_friend.last_name }}</p>
+	<p>Occupation: {{ one_friend.occupation }}</p>
+
+	<a href="/"><button>GO BACK</button></a>
+	<br><br>
+	<!-- Toggle the form below -->
+	<label for="cb1">Edit this Friend ?</label>
+	<input type="checkbox" id="cb1" name="cb1">
+
+	<form action="/update_friend/{{ one_friend.id }}" method="post">
+		<p>
+			<label for="fn">First Name:</label>
+			<input type="text" name="first_name" id="fn" value="{{ one_friend.first_name }}">
+		</p>
+		<p>
+			<label for="ln">Last Name:</label>
+			<input type="text" name="last_name" id="ln" value="{{ one_friend.last_name }}">
+		</p>
+		<p>
+			<label for="occupation">Occupation:</label>
+			<input type="text" name="occupation" id="occupation" value="{{ one_friend.occupation }}">
+		</p>
+		<br>
+		<input type="submit" value="Update Friend">
+	</form>
+</body>
+</html>

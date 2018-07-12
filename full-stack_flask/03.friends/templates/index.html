@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Friends</title>
+</head>
+<body>
+	<h2>These are all my friends</h2>
+	{% for friend in all_friends %}
+		<p>First Name: {{ friend.first_name }}</p>
+		<a href="/friend/{{friend.id}}"><button>Show Details</button></a> | <a href="/remove_friend/{{friend.id}}"><button>Delete Friend</button></a>
+	{% endfor %}
+	<hr>
+
+	<h2>Add a Friend</h2>
+	<form action="/friends" method="post">
+		<p>
+			<label for="fn">First Name:</label>
+			<input type="text" name="first_name" id="fn">
+		</p>
+		<p>
+			<label for="ln">Last Name:</label>
+			<input type="text" name="last_name" id="ln">
+		</p>
+		<p>
+			<label for="occupation">Occupation:</label>
+			<input type="text" name="occupation" id="occupation">
+		</p>
+		<br>
+		<input type="submit" value="Add Friend">
+	</form>
+</body>
+</html>

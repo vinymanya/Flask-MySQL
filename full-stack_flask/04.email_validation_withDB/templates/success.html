@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Success Page</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+	{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			{% for message in messages %}
+				<p class="success">{{ message }}</p>
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+	<h2>Email Address Entered:</h2>
+	{% for email in all_emails %}
+		<p>{{ email.email_address }}   {{ email.created_at }} | <a href="/delete_email/{{email.id}}"><button>Delete</button></a></p>
+	{% endfor %}
+
+	<a href="/"><button>GO BACK</button></a>
+</body>
+</html>

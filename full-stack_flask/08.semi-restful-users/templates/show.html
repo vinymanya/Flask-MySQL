@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Show user</title>
+</head>
+<body>
+	{% for one in user %}
+		<h3>Details of User {{ one.user_id }}</h3>
+		<p>Full Name: {{ one.full_name }}</p>
+		<p>Email: {{ one.email }}</p>
+		<p>Created at {{ one.time_stamp }}</p>
+
+		<p>
+			<a href="/users/{{ one.user_id }}/edit">Edit</a> |
+			<a href="/users/{{ one.user_id }}/delete">Delete</a> |
+			<a href="/users">Go Back</a>
+		</p>
+	{% endfor %}
+	
+</body>
+</html>

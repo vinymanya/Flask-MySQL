@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Full Friends Assignment</title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'style.css')}}">
+</head>
+<body>
+<table>
+<h1>Full Friends</h1>
+	<thead>
+		<tr>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>Email</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for friend in all_friends %}
+			<tr>
+				<td>{{friend["first_name"]}}</td>
+				<td>{{friend["last_name"]}}</td>
+				<td>{{friend["email"]}}</td>
+				<td>
+					<a href="/friends/<friend_id>/edit"><button>Edit</button></a>
+					<a href="/friends/<friend_id>/delete"><button>Delete</button></a>
+				</td>
+				
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<br><br>
+<form action="/friends" method="post">
+	<label for="fn">First Name:</label>
+	<input type="text" name="first_name" id="fn">
+	<label for="ln">Last Name:</label>
+	<input type="text" name="last_name" id="ln">
+	<label for="email">Email:</label>
+	<input type="email" name="email" id="email">
+	<br>
+	<input type="submit" value="Add Friend">
+</form>
+</body>
+</html>
