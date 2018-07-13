@@ -73,26 +73,30 @@ def register():
 			flash("You have successfully registered !", "success")
 			return redirect(url_for('dashboard'))
 
-
-@app.route("/users/login", methods=["GET", "POST"])
-def login():
-	if request.method == "POST":
-		username = request.form["first_name"]
-		# Login is simply comparing the password and username in the db
-		query = "SELECT * FROM users WHERE first_name = :first_name"
-		data = {
-			'first_name': username
-		}
-		result = mysql.query_db(query, data) # result is holding onto a list [] or [{}]
-		 # Checking to see if there is a user by that username in the db.
-		if result and bcrypt.check_password_hash(result[0]["password"], request.form["password"]):
-			session["user_id"] = result[0]["id"]
-			session["user_name"] = result[0]["first_name"]
-			return redirect(url_for('dashboard'))
-		else:
-			flash("Invalid Username or Password!!!", "error")
-			return redirect(url_for("login"))
+# Show login form
+@app.route("/login_form")
+def show_login():
 	return render_template("login.html")
+	
+
+@app.route("/users/login", methods=["POST"])
+def login():
+	email = request.form["email"]
+	# Login is simply comparing the password and email in the db
+	query = "SELECT * FROM users WHERE email = :email"
+	data = {
+		'email': email
+	}
+	result = mysql.query_db(query, data) # result is holding onto a list [] or [{}]
+	 # Checking to see if there is a user by that username in the db.
+	if result and bcrypt.check_password_hash(result[0]["password"], request.form["password"]):
+		session["user_id"] = result[0]["id"]
+		session["user_name"] = result[0]["first_name"]
+		return redirect(url_for('dashboard'))
+	else:
+		flash("Invalid email or Password!!!", "error")
+		return redirect(url_for("show_login"))
+	
 
 # checking if the user is loggedin
 def is_logged_in(f):
@@ -161,8 +165,6 @@ def logout():
 	# session.pop("user_name")
 	# You can also do: del 'user_id' from session
 	session.clear()
-	return redirect(url_for("login"))
-
-
+	return redirect(url_for("show_login"))
 
 app.run(debug=True)
